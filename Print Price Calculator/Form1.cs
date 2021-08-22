@@ -129,6 +129,17 @@ namespace Print_Price_Calculator
                 }
             }
 
+            //Works but produces wrong output numbers, leaving commented out for now
+            /*foreach (JobRecord job in jobs)
+            {
+                papername.Add(job.Paper);
+                cost.Add(job.TotalCost);
+                paperconsumed.Add(job.PaperUsed.ToString());
+                printstatus.Add(job.Results);
+                papercost.Add(job.PaperCost);
+                inkconsumed.Add(job.InkUsed);
+                inkcost.Add(job.InkCost.ToString());
+            }*/
 
 
             string csvcontent = null;
