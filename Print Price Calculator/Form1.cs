@@ -69,8 +69,45 @@ namespace Print_Price_Calculator
         List<string> entrynumberarray = new List<string>();
         List<string> costpersqfeetarray = new List<string>();
 
+        private void CalculateInkUsageByColor(List<JobRecord> jobs)
+        {
+            float mb = 0.0f, pb = 0.0f, g = 0.0f, pg = 0.0f, c = 0.0f, m = 0.0f, y = 0.0f, pc = 0.0f, pm = 0.0f, r = 0.0f, b = 0.0f, co = 0.0f, total=0.0f;
+            foreach( JobRecord job in jobs)
+            {
+                mb += float.Parse(job.InkUsed_MB);
+                pb += float.Parse(job.InkUsed_PB);
+                g += float.Parse(job.InkUsed_G);
+                pg += float.Parse(job.InkUsed_PG);
+                c += float.Parse(job.InkUsed_C);
+                m += float.Parse(job.InkUsed_M);
+                y += float.Parse(job.InkUsed_Y);
+                pc += float.Parse(job.InkUsed_PC);
+                pm += float.Parse(job.InkUsed_PM);
+                r += float.Parse(job.InkUsed_R);
+                b += float.Parse(job.InkUsed_B);
+                co += float.Parse(job.InkUsed_CO);
+                total += float.Parse(job.InkUsed);
+            }
+            System.Diagnostics.Debug.WriteLine("Matte Black: " + Math.Round(mb/total*100,2) + "%");
+            System.Diagnostics.Debug.WriteLine("Photo Black: " + Math.Round(pb / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Gray: " + Math.Round(g / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Photo Gray: " + Math.Round(pg / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Cyan: " + Math.Round(c / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Magenta: " + Math.Round(m / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Yellow: " + Math.Round(y / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Photo Cyan: " + Math.Round(pc / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Photo Magenta: " + Math.Round(pm / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Red: " + Math.Round(r / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Blue: " + Math.Round(b / total * 100, 2) + "%");
+            System.Diagnostics.Debug.WriteLine("Chroma Optimizer: " + Math.Round(co / total * 100, 2) + "%");
+        }
+
         private void butt_generate_Click(object sender, EventArgs e)
         {
+            //Load all files into a list of job records
+            List<JobRecord> jobs = JobReader.ReadJobs(openFileDialog1.FileNames);
+            System.Diagnostics.Debug.WriteLine("records read: " + jobs.Count);
+            CalculateInkUsageByColor(jobs);
 
             foreach (string curfilepath in openFileDialog1.FileNames)
             {
