@@ -33,7 +33,7 @@ You should be able to easily compile this application in Visual Studio 2019's C#
 ![image](https://user-images.githubusercontent.com/49788602/130698707-82bdb10b-bc0f-47e4-abbf-d636ebbc16eb.png)
 
 
-6. Select the first line in job log table by clicking on it
+6. Select the first line in job log table by clicking on it.
 
 ![image](https://user-images.githubusercontent.com/49788602/130698801-56cf78c9-4066-43e8-b1fd-e35c80dd0e7e.png)
 
@@ -51,4 +51,5 @@ You should be able to easily compile this application in Visual Studio 2019's C#
 9. Save the CSV file somewhere you can remember
 10. Optionally repeat steps 6-9 for each page in your log
 11. Open CanonCalculator utility and select the CSV file(s) you created and the location to save the new data and click Generate
+12. Note that any jobs in which Cost is ```***```, 0.00, or the job status is ```Cancelled``` will be skipped when calculating the output.
 
