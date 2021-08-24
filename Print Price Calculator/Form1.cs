@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;//
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +12,17 @@ using System.Globalization;
 
 namespace Print_Price_Calculator
 {
+
+    public class OutputRecord
+    {
+        public string PaperName;
+        public decimal TotalCost;
+        public decimal PaperCost;
+        public decimal InkCost;
+        public decimal PaperUsed;
+        public decimal InkUsed;
+    }
+
     public partial class Form1 : Form
     {
 
@@ -102,6 +113,44 @@ namespace Print_Price_Calculator
             System.Diagnostics.Debug.WriteLine("Chroma Optimizer: " + Math.Round(co / total * 100, 2) + "%");
         }
 
+        private Dictionary<string,OutputRecord> GenerateOutputData(List<JobRecord> jobs)
+        {
+            Dictionary<string, OutputRecord> output = new Dictionary<string, OutputRecord>();
+            foreach (JobRecord job in jobs)
+            {
+                try
+                {
+                    if (!output.ContainsKey(job.Paper))
+                        output.Add(job.Paper, new OutputRecord());
+                    OutputRecord newRecord = output[job.Paper];
+                    newRecord.PaperName = job.Paper;
+                    //TODO dont just add
+                    newRecord.TotalCost += System.Convert.ToDecimal(job.TotalCost);
+                    newRecord.PaperCost += System.Convert.ToDecimal(job.PaperCost);
+                    newRecord.InkCost += System.Convert.ToDecimal(job.InkCost);
+                    newRecord.PaperUsed += System.Convert.ToDecimal(job.PaperUsed);
+                    newRecord.InkUsed += System.Convert.ToDecimal(job.InkUsed);
+                }
+                catch (System.OverflowException)
+                {
+                    System.Console.WriteLine(
+                        "The conversion from string to decimal overflowed.");
+                }
+                catch (System.FormatException)
+                {
+                    System.Console.WriteLine(
+                        "The string is not formatted as a decimal.");
+                }
+                catch (System.ArgumentNullException)
+                {
+                    System.Console.WriteLine(
+                        "The string is null.");
+                }
+            }
+            return output;
+        }
+
+           
         private void butt_generate_Click(object sender, EventArgs e)
         {
             //Load all files into a list of job records
@@ -129,18 +178,8 @@ namespace Print_Price_Calculator
                 }
             }
 
-            //Works but produces wrong output numbers, leaving commented out for now
-            /*foreach (JobRecord job in jobs)
-            {
-                papername.Add(job.Paper);
-                cost.Add(job.TotalCost);
-                paperconsumed.Add(job.PaperUsed.ToString());
-                printstatus.Add(job.Results);
-                papercost.Add(job.PaperCost);
-                inkconsumed.Add(job.InkUsed);
-                inkcost.Add(job.InkCost.ToString());
-            }*/
-
+            //TODO write the return data
+            Dictionary<string, OutputRecord> outputData = GenerateOutputData(jobs);
 
             string csvcontent = null;
 
