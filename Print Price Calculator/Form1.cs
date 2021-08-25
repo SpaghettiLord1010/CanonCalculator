@@ -128,6 +128,8 @@ namespace Print_Price_Calculator
                         output.Add(job.Paper, new OutputRecord());
                     OutputRecord newRecord = output[job.Paper];
                     newRecord.PaperName = job.Paper;
+                    if (job.TotalCost == "***" || job.Results == "Canceled")
+                        continue;
                     newRecord.TotalCost += System.Convert.ToDecimal(job.TotalCost);
                     newRecord.PaperCost += System.Convert.ToDecimal(job.PaperCost);
                     newRecord.InkCost += System.Convert.ToDecimal(job.InkCost);
