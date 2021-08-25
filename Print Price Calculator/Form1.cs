@@ -19,8 +19,12 @@ namespace Print_Price_Calculator
         public decimal TotalCost;
         public decimal PaperCost;
         public decimal InkCost;
+        public decimal AreaCost;
+        public decimal PaperAreaCost;
+        public decimal InkAreaCost;
         public decimal PaperUsed;
         public decimal InkUsed;
+        public int JobCount;
     }
 
     public partial class Form1 : Form
@@ -124,12 +128,12 @@ namespace Print_Price_Calculator
                         output.Add(job.Paper, new OutputRecord());
                     OutputRecord newRecord = output[job.Paper];
                     newRecord.PaperName = job.Paper;
-                    //TODO dont just add
                     newRecord.TotalCost += System.Convert.ToDecimal(job.TotalCost);
                     newRecord.PaperCost += System.Convert.ToDecimal(job.PaperCost);
                     newRecord.InkCost += System.Convert.ToDecimal(job.InkCost);
                     newRecord.PaperUsed += System.Convert.ToDecimal(job.PaperUsed);
                     newRecord.InkUsed += System.Convert.ToDecimal(job.InkUsed);
+                    ++newRecord.JobCount;
                 }
                 catch (System.OverflowException)
                 {
@@ -146,7 +150,17 @@ namespace Print_Price_Calculator
                     System.Console.WriteLine(
                         "The string is null.");
                 }
+                //TODO show error box and recover if there is a problem
             }
+
+            foreach(OutputRecord record in output.Values)
+            {
+                //TODO only convert to US units if a UI checkbox for US units is selected
+                record.PaperAreaCost = record.PaperCost / (record.PaperUsed * (decimal)10.7639104);
+                record.InkAreaCost = record.InkCost / (record.PaperUsed * (decimal)10.7639104);
+                record.AreaCost = record.TotalCost / (record.PaperUsed * (decimal)10.7639104);
+            }
+
             return output;
         }
 
