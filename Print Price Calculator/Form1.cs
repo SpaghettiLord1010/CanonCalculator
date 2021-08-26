@@ -13,20 +13,6 @@ using System.Globalization;
 namespace Print_Price_Calculator
 {
 
-    public class OutputRecord
-    {
-        public string PaperName;
-        public decimal TotalCost;
-        public decimal PaperCost;
-        public decimal InkCost;
-        public decimal AreaCost;
-        public decimal PaperAreaCost;
-        public decimal InkAreaCost;
-        public decimal PaperUsed;
-        public decimal InkUsed;
-        public int JobCount;
-    }
-
     public partial class Form1 : Form
     {
 
@@ -157,6 +143,8 @@ namespace Print_Price_Calculator
 
             foreach(OutputRecord record in output.Values)
             {
+                if (record.PaperUsed <= 0)
+                    continue;
                 //TODO only convert to US units if a UI checkbox for US units is selected
                 record.PaperAreaCost = record.PaperCost / (record.PaperUsed * (decimal)10.7639104);
                 record.InkAreaCost = record.InkCost / (record.PaperUsed * (decimal)10.7639104);

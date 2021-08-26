@@ -40,7 +40,7 @@ namespace Print_Price_Calculator
         public string PaperCost { get; set; }
 
         [Name("Total Ink Cost")]
-        public decimal InkCost { get; set; }
+        public string InkCost { get; set; }
 
         [Name("Total of Other Costs")]
         public string OtherCost { get; set; }
@@ -52,7 +52,7 @@ namespace Print_Price_Calculator
         public string Paper { get; set; }
 
         [Name("Paper Consumed [square meter]")]
-        public decimal PaperUsed { get; set; }
+        public string PaperUsed { get; set; }
 
         [Name("Print Quality")]
         public string Quality { get; set; }
