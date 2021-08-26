@@ -89,18 +89,18 @@ namespace Print_Price_Calculator
                 co += float.Parse(job.InkUsed_CO);
                 total += float.Parse(job.InkUsed);
             }
-            System.Diagnostics.Debug.WriteLine("Matte Black: " + Math.Round(mb/total*100,2) + "%");
-            System.Diagnostics.Debug.WriteLine("Photo Black: " + Math.Round(pb / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Gray: " + Math.Round(g / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Photo Gray: " + Math.Round(pg / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Cyan: " + Math.Round(c / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Magenta: " + Math.Round(m / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Yellow: " + Math.Round(y / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Photo Cyan: " + Math.Round(pc / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Photo Magenta: " + Math.Round(pm / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Red: " + Math.Round(r / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Blue: " + Math.Round(b / total * 100, 2) + "%");
-            System.Diagnostics.Debug.WriteLine("Chroma Optimizer: " + Math.Round(co / total * 100, 2) + "%");
+            lbl_mb.Text = ("Matte Black: " + Math.Round(mb/total*100,2) + "%");
+            lbl_pb.Text = ("Photo Black: " + Math.Round(pb / total * 100, 2) + "%");
+            lbl_gray.Text = ("Gray: " + Math.Round(g / total * 100, 2) + "%");
+            lbl_pg.Text = ("Photo Gray: " + Math.Round(pg / total * 100, 2) + "%");
+            lbl_cyan.Text = ("Cyan: " + Math.Round(c / total * 100, 2) + "%");
+            lbl_magenta.Text = ("Magenta: " + Math.Round(m / total * 100, 2) + "%");
+            lbl_yellow.Text = ("Yellow: " + Math.Round(y / total * 100, 2) + "%");
+            lbl_pc.Text = ("Photo Cyan: " + Math.Round(pc / total * 100, 2) + "%");
+            lbl_pm.Text = ("Photo Magenta: " + Math.Round(pm / total * 100, 2) + "%");
+            lbl_red.Text = ("Red: " + Math.Round(r / total * 100, 2) + "%");
+            lbl_blue.Text = ("Blue: " + Math.Round(b / total * 100, 2) + "%");
+            lbl_co.Text = ("Chroma Optimizer: " + Math.Round(co / total * 100, 2) + "%");
         }
 
         private Dictionary<string,OutputRecord> GenerateOutputData(List<JobRecord> jobs)
